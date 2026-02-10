@@ -16,11 +16,11 @@ public class Type {
         this.idFunc = idFunc;
     }
 
-    public Node createNode(Node parent, String text) {
+    public Node createNode(String text) {
         Matcher matcher = pattern.matcher(text.trim());
         if (!matcher.matches())
             return null;
-        Node child = parent.addChild(this, matcher.group("H"), matcher.group("T"));
+        Node child = new Node(this, matcher.group("H"), matcher.group("T"));
         return child;
     }
 

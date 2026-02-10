@@ -5,27 +5,22 @@ import java.util.List;
 
 public class Node {
 
-    public final Node parent;
+    public Node parent;
     public final List<Node> children = new ArrayList<>();
 
     public final Type type;
     public final String header;
     public final String title;
 
-    Node(Node parent, Type type, String header, String title) {
-        this.parent = parent;
+    public Node(Type type, String header, String title) {
         this.type = type;
         this.header = header;
         this.title = title;
     }
 
-    public static Node createRoot(Type type) {
-        return new Node(null, type, null, null);
-    }
-
-    public Node addChild(Type type, String header, String title) {
-        Node child = new Node(this, type, header, title);
+    public Node addChild(Node child) {
         children.add(child);
+        child.parent = this;
         return child;
     }
 

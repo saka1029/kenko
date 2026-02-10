@@ -12,7 +12,7 @@ public class Parser {
     Node current;
 
     public Parser(BufferedReader reader) {
-        this.current = this.root = Node.createRoot(null);
+        this.current = this.root = new Node(null, null, null);
         this.reader = reader;
     }
 
