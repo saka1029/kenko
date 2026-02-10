@@ -1,9 +1,36 @@
 package saka1029.kenko.parser;
 
+import java.util.Map;
+
 public class Pat {
 
     public static final String 空白 = "\\h+";
     public static final String 漢数字 = "[〇一二三四五六七八九十]+";
+
+    static final Map<Character, Integer> KAN2INT = Map.ofEntries(
+        Map.entry('百', 100) , Map.entry('十', 10),
+        Map.entry('一', 1), Map.entry('二', 2), Map.entry('三', 3), Map.entry('四', 4),
+        Map.entry('五', 5), Map.entry('六', 6), Map.entry('七', 7), Map.entry('八', 8),
+        Map.entry('九', 9));
+
+    public static int Kan2Int(String s) {
+        int total = 0, current = 0;
+        for (int i = 0, size = s.length(); i < size; ++i) {
+            Integer d = KAN2INT.get(s.charAt(i));
+            if (d == null) {
+                throw new NumberFormatException();
+            } else if (d < 10) {
+                current = d;
+            } else if (current > 0) {
+                total += current * d;
+                current = 0;
+            } else {
+                total += d;
+            }
+        }
+        total += current;
+        return total;
+    }
 
     public static String 漢数字正規化(String s) {
         // s = 正規化(s);

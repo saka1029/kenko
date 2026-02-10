@@ -1,6 +1,7 @@
 package saka1029.kenko.parser;
 
 import static org.junit.Assert.assertEquals;
+import static saka1029.kenko.parser.Pat.Kan2Int;
 
 import org.junit.Test;
 
@@ -14,5 +15,89 @@ public class TestPat {
         assertEquals("11", Pat.漢数字正規化("十一"));
         assertEquals("12", Pat.漢数字正規化("十二"));
         assertEquals("32", Pat.漢数字正規化("三十二"));
+    }
+
+    @Test
+    public void testKan2Int() {
+        assertEquals(1, Kan2Int("一"));
+        assertEquals(2, Kan2Int("二"));
+        assertEquals(3, Kan2Int("三"));
+        assertEquals(4, Kan2Int("四"));
+        assertEquals(5, Kan2Int("五"));
+        assertEquals(6, Kan2Int("六"));
+        assertEquals(7, Kan2Int("七"));
+        assertEquals(8, Kan2Int("八"));
+        assertEquals(9, Kan2Int("九"));
+        assertEquals(10, Kan2Int("十"));
+        assertEquals(11, Kan2Int("十一"));
+        assertEquals(12, Kan2Int("十二"));
+        assertEquals(13, Kan2Int("十三"));
+        assertEquals(14, Kan2Int("十四"));
+        assertEquals(15, Kan2Int("十五"));
+        assertEquals(16, Kan2Int("十六"));
+        assertEquals(17, Kan2Int("十七"));
+        assertEquals(18, Kan2Int("十八"));
+        assertEquals(19, Kan2Int("十九"));
+        assertEquals(20, Kan2Int("二十"));
+        assertEquals(21, Kan2Int("二十一"));
+        assertEquals(22, Kan2Int("二十二"));
+        assertEquals(23, Kan2Int("二十三"));
+        assertEquals(24, Kan2Int("二十四"));
+        assertEquals(25, Kan2Int("二十五"));
+        assertEquals(26, Kan2Int("二十六"));
+        assertEquals(27, Kan2Int("二十七"));
+        assertEquals(28, Kan2Int("二十八"));
+        assertEquals(29, Kan2Int("二十九"));
+        assertEquals(30, Kan2Int("三十"));
+        assertEquals(31, Kan2Int("三十一"));
+        assertEquals(32, Kan2Int("三十二"));
+        assertEquals(33, Kan2Int("三十三"));
+        assertEquals(34, Kan2Int("三十四"));
+        assertEquals(35, Kan2Int("三十五"));
+        assertEquals(36, Kan2Int("三十六"));
+        assertEquals(37, Kan2Int("三十七"));
+        assertEquals(38, Kan2Int("三十八"));
+        assertEquals(39, Kan2Int("三十九"));
+        assertEquals(40, Kan2Int("四十"));
+        assertEquals(41, Kan2Int("四十一"));
+        assertEquals(42, Kan2Int("四十二"));
+        assertEquals(43, Kan2Int("四十三"));
+        assertEquals(44, Kan2Int("四十四"));
+        assertEquals(45, Kan2Int("四十五"));
+        assertEquals(46, Kan2Int("四十六"));
+        assertEquals(47, Kan2Int("四十七"));
+        assertEquals(48, Kan2Int("四十八"));
+        assertEquals(49, Kan2Int("四十九"));
+        assertEquals(50, Kan2Int("五十"));
+        assertEquals(91, Kan2Int("九十一"));
+        assertEquals(92, Kan2Int("九十二"));
+        assertEquals(93, Kan2Int("九十三"));
+        assertEquals(94, Kan2Int("九十四"));
+        assertEquals(95, Kan2Int("九十五"));
+        assertEquals(96, Kan2Int("九十六"));
+        assertEquals(97, Kan2Int("九十七"));
+        assertEquals(98, Kan2Int("九十八"));
+        assertEquals(99, Kan2Int("九十九"));
+        assertEquals(100, Kan2Int("百"));
+        assertEquals(101, Kan2Int("百一"));
+        assertEquals(102, Kan2Int("百二"));
+        assertEquals(103, Kan2Int("百三"));
+        assertEquals(104, Kan2Int("百四"));
+        assertEquals(105, Kan2Int("百五"));
+        assertEquals(106, Kan2Int("百六"));
+        assertEquals(107, Kan2Int("百七"));
+        assertEquals(108, Kan2Int("百八"));
+        assertEquals(109, Kan2Int("百九"));
+        assertEquals(110, Kan2Int("百十"));
+        assertEquals(111, Kan2Int("百十一"));
+        assertEquals(112, Kan2Int("百十二"));
+        assertEquals(113, Kan2Int("百十三"));
+        assertEquals(114, Kan2Int("百十四"));
+        assertEquals(115, Kan2Int("百十五"));
+        assertEquals(116, Kan2Int("百十六"));
+        assertEquals(117, Kan2Int("百十七"));
+        assertEquals(118, Kan2Int("百十八"));
+        assertEquals(119, Kan2Int("百十九"));
+        assertEquals(120, Kan2Int("百二十"));
     }
 }
