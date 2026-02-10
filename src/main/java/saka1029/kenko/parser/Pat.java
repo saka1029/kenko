@@ -8,7 +8,7 @@ public class Pat {
     public static final String 漢数字 = "[〇一二三四五六七八九十]+";
 
     static final Map<Character, Integer> KAN2INT = Map.ofEntries(
-        Map.entry('百', 100) , Map.entry('十', 10),
+        Map.entry('百', 100) , Map.entry('十', 10), Map.entry('〇', 0),
         Map.entry('一', 1), Map.entry('二', 2), Map.entry('三', 3), Map.entry('四', 4),
         Map.entry('五', 5), Map.entry('六', 6), Map.entry('七', 7), Map.entry('八', 8),
         Map.entry('九', 9));
@@ -20,7 +20,7 @@ public class Pat {
             if (d == null) {
                 throw new NumberFormatException();
             } else if (d < 10) {
-                current = d;
+                current = current * 10 + d;
             } else if (current > 0) {
                 total += current * d;
                 current = 0;
