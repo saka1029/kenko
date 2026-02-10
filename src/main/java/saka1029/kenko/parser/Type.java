@@ -10,7 +10,7 @@ public class Type {
 
     public Type(String name, String pattern) {
         this.name = name;
-        this.pattern = Pattern.compile(pattern);
+        this.pattern = Pattern.compile("^%s$".formatted(pattern));
     }
 
     public Node match(Node parent, String text) {
