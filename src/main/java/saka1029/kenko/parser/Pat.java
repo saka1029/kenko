@@ -4,8 +4,14 @@ import java.util.Map;
 
 public class Pat {
 
-    public static final String 空白 = "\\h+";
-    public static final String 漢数字 = "[〇一二三四五六七八九十]+";
+    public static final String P空白 = "\\h+";
+    public static final String P漢数字 = "[〇一二三四五六七八九十]+";
+    public static final String P数字 = "[0-9０-９]+";
+    public static final String Pイロハ = "["
+        + "イロハニホヘトチリヌルヲ"
+        + "ワカヨタレソツネナラム"
+        + "ウヰノオクヤマケフコエテ"
+        + "アサキユメミシヱヒモセスン]+";
 
     static final Map<Character, Integer> KAN2INT = Map.ofEntries(
         Map.entry('万', 10000), Map.entry('千', 1000), Map.entry('百', 100), Map.entry('十', 10),

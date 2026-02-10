@@ -29,7 +29,7 @@ public class Node {
         return child;
     }
 
-    public int id() {
-        return type.idFunc.apply(this);
+    public String id() {
+        return type.id(this);
     }
 }

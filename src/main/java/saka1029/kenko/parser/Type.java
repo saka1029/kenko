@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Type {
 
-    public interface IdFunc { int apply(Node node); }
+    public interface IdFunc { String apply(Node node); }
     public final String name;
     public final Pattern pattern;
     final IdFunc idFunc;
@@ -22,5 +22,9 @@ public class Type {
             return null;
         Node child = parent.addChild(this, matcher.group("H"), matcher.group("T"));
         return child;
+    }
+
+    public String id(Node node) {
+        return idFunc.apply(node);
     }
 }
