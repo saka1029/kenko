@@ -5,12 +5,15 @@ import java.util.regex.Pattern;
 
 public class Type {
 
+    public interface IdFunc { int apply(Node node); }
     public final String name;
     public final Pattern pattern;
+    final IdFunc idFunc;
 
-    public Type(String name, String pattern) {
+    public Type(String name, String pattern, IdFunc idFunc) {
         this.name = name;
         this.pattern = Pattern.compile("^%s$".formatted(pattern));
+        this.idFunc = idFunc;
     }
 
     public Node createNode(Node parent, String text) {

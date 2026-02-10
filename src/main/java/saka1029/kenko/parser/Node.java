@@ -28,4 +28,8 @@ public class Node {
         children.add(child);
         return child;
     }
+
+    public int id() {
+        return type.idFunc.apply(this);
+    }
 }
