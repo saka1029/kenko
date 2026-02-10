@@ -28,4 +28,16 @@ public class Node {
     public String id() {
         return type.id(this);
     }
+
+    static final String NL = System.lineSeparator();
+
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append(type).append(": ")
+            .append(header).append(" ").append(title).append(NL);
+        for (String line : text)
+            sb.append("    ").append(line).append(NL);
+        return sb.toString();
+    }
 }

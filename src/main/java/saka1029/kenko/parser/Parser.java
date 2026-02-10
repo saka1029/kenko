@@ -13,9 +13,8 @@ public class Parser {
     Node node;
 
     public Parser(BufferedReader reader) {
-        this.root = new Node(null, null, null);
+        this.node = this.root = new Node(null, null, null);
         this.reader = reader;
-        get();
     }
 
     Node get() {
@@ -29,9 +28,9 @@ public class Parser {
                 }
                 node.text.add(line);
             }
+            return node = null;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return node = null;
     }
 }
