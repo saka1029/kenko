@@ -47,7 +47,7 @@ public class Pat {
     }
 
     public static int Iroha2Int(String s) {
-        return Pイロハ.indexOf(s.charAt(0)) + 1;
+        return Pイロハ.indexOf(s.charAt(0));
     }
 
 }

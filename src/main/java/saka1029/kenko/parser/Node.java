@@ -35,6 +35,7 @@ public class Node {
     public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append(type).append(": ")
+            .append("id=").append(id()).append(" ")
             .append(header).append(" ").append(title).append(NL);
         for (String line : text)
             sb.append("    ").append(line).append(NL);
