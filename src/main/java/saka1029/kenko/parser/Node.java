@@ -11,6 +11,7 @@ public class Node {
     public final Type type;
     public final String header;
     public final String title;
+    public final List<String> text = new ArrayList<>();
 
     public Node(Type type, String header, String title) {
         this.type = type;
