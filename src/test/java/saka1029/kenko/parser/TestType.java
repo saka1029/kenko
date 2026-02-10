@@ -15,7 +15,7 @@ public class TestType {
         Type 条 = new Type("条", "第(?<H>" + 漢数字 + ")条" + 空白 + "(?<T>.*)");
         String text = "  第一章　総則(第一条―第三条)  ";
         Node root = Node.createRoot(null);
-        Node child = 章.match(root, text);
+        Node child = 章.createNode(root, text);
         assertNotNull(child);
         assertEquals("一", child.header);
         assertEquals("総則(第一条―第三条)", child.title);

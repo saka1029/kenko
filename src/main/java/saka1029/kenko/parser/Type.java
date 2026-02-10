@@ -13,7 +13,7 @@ public class Type {
         this.pattern = Pattern.compile("^%s$".formatted(pattern));
     }
 
-    public Node match(Node parent, String text) {
+    public Node createNode(Node parent, String text) {
         Matcher matcher = pattern.matcher(text.trim());
         if (!matcher.matches())
             return null;
