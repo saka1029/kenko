@@ -17,9 +17,14 @@ public class TestParser {
         void parse() {
             get();
             while (node != null) {
-                System.out.println(node);
+                root.addChild(node);
                 get();
             }
+            System.out.println("root:");
+            System.out.println(root);
+            System.out.println("children:");
+            for (Node node : root.children)
+                System.out.println(node);
         }
     }
 

@@ -1,6 +1,9 @@
 package saka1029.kenko.parser;
 
+import java.text.Normalizer;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Pat {
 
@@ -31,9 +34,9 @@ public class Pat {
         int total = 0, current = 0;
         for (int i = 0, size = s.length(); i < size; ++i) {
             Integer d = KAN2INT.get(s.charAt(i));
-            if (d == null) {
-                throw new NumberFormatException();
-            } else if (d < 10) {
+            if (d == null)
+                continue;
+            if (d < 10) {
                 current = current * 10 + d;
             } else if (current > 0) {
                 total += current * d;
@@ -46,8 +49,17 @@ public class Pat {
         return total;
     }
 
+    public static String KanNo2Str(String s) {
+        String[] ss = s.split("の");
+        return Stream.of(ss).map(x -> "" + Kan2Int(x)).collect(Collectors.joining("-"));
+    }
+
     public static int Iroha2Int(String s) {
         return Pイロハ.indexOf(s.charAt(0));
+    }
+
+    public static String Zen2Han(String str) {
+        return Normalizer.normalize(str, Normalizer.Form.NFKD);
     }
 
 }

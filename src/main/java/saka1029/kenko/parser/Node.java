@@ -9,14 +9,14 @@ public class Node {
     public final List<Node> children = new ArrayList<>();
 
     public final Type type;
+    public final String number;
     public final String header;
-    public final String title;
     public final List<String> text = new ArrayList<>();
 
-    public Node(Type type, String header, String title) {
+    public Node(Type type, String number, String header) {
         this.type = type;
+        this.number = number;
         this.header = header;
-        this.title = title;
     }
 
     public Node addChild(Node child) {
@@ -26,7 +26,7 @@ public class Node {
     }
 
     public String id() {
-        return type.id(this);
+        return type == null ? null : type.id(this);
     }
 
     static final String NL = System.lineSeparator();
@@ -36,7 +36,7 @@ public class Node {
         StringBuffer sb = new StringBuffer();
         sb.append(type).append(": ")
             .append("id=").append(id()).append(" ")
-            .append(header).append(" ").append(title).append(NL);
+            .append(number).append(" ").append(header).append(NL);
         for (String line : text)
             sb.append("    ").append(line).append(NL);
         return sb.toString();
