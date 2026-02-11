@@ -52,7 +52,7 @@ public class 健康保険法読込 extends Parser {
         }
     }
 
-    void 注釈or条(Node parent) {
+    void 条or注釈(Node parent) {
         while (true) {
             if (is(条)) {
                 while (eat(条)) {
@@ -69,8 +69,9 @@ public class 健康保険法読込 extends Parser {
                             break;
                     }
                 }
-            } else if (eat(注釈)) {
-                parent.addChild(eaten);
+            } else if (is(注釈)) {
+                while (eat(注釈))
+                    parent.addChild(eaten);
             } else
                 break;
         }
@@ -82,13 +83,13 @@ public class 健康保険法読込 extends Parser {
             parent.addChild(eaten);
         while (eat(章)) {
             Node syo = parent.addChild(eaten);
-            注釈or条(syo);
+            条or注釈(syo);
             while (eat(節)) {
                 Node setu = parent.addChild(eaten);
-                注釈or条(setu);
+                条or注釈(setu);
                 while (eat(款)) {
                     Node kan = parent.addChild(eaten);
-                    注釈or条(kan);
+                    条or注釈(kan);
                 }
             }
         }
