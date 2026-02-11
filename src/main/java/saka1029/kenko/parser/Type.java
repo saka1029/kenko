@@ -24,6 +24,15 @@ public class Type {
         return child;
     }
 
+    /**
+     * idは同一の親にぶら下がる子ノードをユニークに識別する識別子である。
+     * 形式は
+     * id     = digits { "-" digits }
+     * digits = DIGIT { DIGIT }
+     * DIGIT  = "0" | "1" | "2" | "3" | "4" | "5" | "5" | "7" | "8" | "9"
+     * @param node
+     * @return
+     */
     public String id(Node node) {
         return idFunc.apply(node);
     }
