@@ -10,7 +10,7 @@ public class TestType {
 
     @Test
     public void testType() {
-        Type.IdFunc idf = node -> "" + Kan2Int(node.number);
+        Type.IdFunc idf = n -> "" + Kan2Int(n);
         Type 章 = new Type("章", "第(?<H>" + P漢数字 + ")章" + P空白 + "(?<T>.*)", idf);
         Type 節 = new Type("節", "第(?<H>" + P漢数字 + ")節" + P空白 + "(?<T>.*)", idf);
         Type 条 = new Type("条", "第(?<H>" + P漢数字 + ")条" + P空白 + "(?<T>.*)", idf);

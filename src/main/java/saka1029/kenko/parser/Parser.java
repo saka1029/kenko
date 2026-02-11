@@ -7,13 +7,14 @@ import java.util.List;
 
 public abstract class Parser {
 
+    static final Type ROOT_TYPE = new Type("ROOT", "", n -> "#");
     final Node root;
     final BufferedReader reader;
     final List<Type> types = new ArrayList<>();
     Node node;
 
     public Parser(BufferedReader reader) {
-        this.node = this.root = new Node(null, null, null);
+        this.node = this.root = new Node(ROOT_TYPE, null, null);
         this.reader = reader;
     }
 
@@ -21,6 +22,9 @@ public abstract class Parser {
         try {
             String line;
             while ((line = reader.readLine()) != null) {
+                line = line.trim();
+                if (line.startsWith("#"))
+                    continue;
                 for (Type type : types) {
                     Node n = type.createNode(line);
                     if (n != null)

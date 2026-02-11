@@ -5,11 +5,11 @@ import static saka1029.kenko.parser.Pat.*;
 
 public class 健康保険法読込 extends Parser {
 
-    static final Type.IdFunc KAN_ID = node -> "" + Kan2Int(node.number);
-    static final Type.IdFunc KAN_NO_ID = node -> KanNo2Str(node.number);
-    static final Type.IdFunc IROHA_ID = node -> "" + Iroha2Int(node.number);
-    static final Type.IdFunc NUM_ID = node -> Zen2Han(node.number);
-    public static Type 目次 = new Type("目次", "(?<H>)(?<T>目次)", node -> "#");
+    static final Type.IdFunc KAN_ID = n -> "" + Kan2Int(n);
+    static final Type.IdFunc KAN_NO_ID = n -> KanNo2Str(n);
+    static final Type.IdFunc IROHA_ID = n -> "" + Iroha2Int(n);
+    static final Type.IdFunc NUM_ID = n -> Zen2Han(n);
+    public static Type 目次 = new Type("目次", "(?<H>)(?<T>目次)", n -> "#");
     public static Type 章 = new Type("章", "(?<H>第" + P漢数字 + "章)" + P空白 + "(?<T>.*)", KAN_ID);
     public static Type 節 = new Type("節", "(?<H>第" + P漢数字 + "節)" + P空白 + "(?<T>.*)", KAN_ID);
     public static Type 款 = new Type("款", "(?<H>第" + P漢数字 + "款)" + P空白 + "(?<T>.*)", KAN_ID);
@@ -44,16 +44,45 @@ public class 健康保険法読込 extends Parser {
         }
     }
 
+    void 条(Node parent) {
+        while (eat(条))
+            parent.addChild(eaten);
+    }
+
+    void 注釈or条(Node parent) {
+        while (true) {
+            if (eat(条)) {
+                Node jo = parent.addChild(eaten);
+                while (eat(数字)) {
+                    Node suji = jo.addChild(eaten);
+                    while (eat(漢数字)) {
+                        Node kans = suji.addChild(eaten);
+                        while (eat(イロハ)) {
+                            kans.addChild(eaten);
+                        }
+                    }
+                }
+            } else if (eat(注釈)) {
+                parent.addChild(eaten);
+            } else
+                break;
+        }
+    }
+
     @Override
     void parseMain(Node parent) {
-        while (true) {
-            if (eat(注釈)) {
-                parent.children.add(eaten);
-            } else if (eat(目次)) {
-                Node mokuji = parent.addChild(eaten);
-                目次(mokuji);
-            } else {
-                break;  // discard
+        while (eat(注釈))
+            parent.addChild(eaten);
+        while (eat(章)) {
+            Node syo = parent.addChild(eaten);
+            注釈or条(syo);
+            while (eat(節)) {
+                Node setu = parent.addChild(eaten);
+                注釈or条(setu);
+                while (eat(款)) {
+                    Node kan = parent.addChild(eaten);
+                    注釈or条(kan);
+                }
             }
         }
     }

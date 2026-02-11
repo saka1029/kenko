@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Type {
 
-    public interface IdFunc { String apply(Node node); }
+    public interface IdFunc { String apply(String number); }
     public final String name;
     public final Pattern pattern;
     final IdFunc idFunc;
@@ -25,7 +25,7 @@ public class Type {
     }
 
     /**
-     * idは同一の親にぶら下がる子ノードをユニークに識別する識別子である。
+     * idは同一の親にぶら下がる子ノードをユニークに識別する識別子です。
      * 形式は
      * <pre>
      * id     = digits { "-" digits }
@@ -33,15 +33,15 @@ public class Type {
      * DIGIT  = "0" | "1" | "2" | "3" | "4" | "5" | "5" | "7" | "8" | "9"
      * </pre>
      * ユニークに識別する情報を持たない場合は"#"とする。
-     * @param node
+     * @param number
      * @return
      */
-    public String id(Node node) {
-        return idFunc.apply(node);
+    public String id(String number) {
+        return idFunc.apply(number);
     }
 
     @Override
     public String toString() {
-        return "Type:" + name;
+        return name;
     }
 }

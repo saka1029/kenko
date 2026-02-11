@@ -2,6 +2,7 @@ package saka1029.kenko.parser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Node {
 
@@ -18,6 +19,7 @@ public class Node {
     public final List<String> text = new ArrayList<>();
 
     public Node(Type type, String number, String header) {
+        Objects.requireNonNull(type);
         this.type = type;
         this.number = number;
         this.header = header;
@@ -30,7 +32,7 @@ public class Node {
     }
 
     public String id() {
-        return type == null ? null : type.id(this);
+        return type.id(number);
     }
 
     public void visit(Visitor visitor, int depth) {
