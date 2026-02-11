@@ -19,6 +19,10 @@ public class TextWriter implements Closeable {
         this(outTxtFile.toString());
     }
     
+    public void print(Object obj) {
+        writer.print(obj);
+    }
+
     public void println(String format, Object... args) {
         writer.printf(format + NL, args);
     }

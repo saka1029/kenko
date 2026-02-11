@@ -45,9 +45,9 @@ public abstract class Parser {
         parseMain(root);
     }
 
-    public Node eaten;
+    Node eaten;
 
-    public boolean eat(Type expected) {
+    boolean eat(Type expected) {
         if (node == null)
             return false;
         if (node.type == expected) {
@@ -58,9 +58,13 @@ public abstract class Parser {
         return false;
     }
 
-    public boolean is(Type expected) {
+    boolean is(Type expected) {
         if (node == null)
             return false;
         return node.type == expected;
+    }
+
+    Node addEatenTo(Node parent) {
+        return parent.addChild(eaten);
     }
 }

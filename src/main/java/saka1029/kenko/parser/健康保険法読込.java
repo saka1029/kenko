@@ -44,29 +44,29 @@ public class 健康保険法読込 extends Parser {
     
     void 漢数字(Node parent) {
         while (eat(漢数字)) {
-            Node kans = parent.addChild(eaten);
+            Node kans = addEatenTo(parent);
             while (eat(イロハ))
-                kans.addChild(eaten);
+                addEatenTo(kans);
         }
     }
     
     void 数字(Node parent) {
         while (eat(数字)) {
-            Node suji = parent.addChild(eaten);
+            Node suji = addEatenTo(parent);
             漢数字(suji);
         }
     }
 
     void 注釈(Node parent) {
         while (eat(注釈))
-            parent.addChild(eaten);
+            addEatenTo(parent);
     }
 
     void 条or注釈(Node parent) {
         while (true) {
             if (is(条)) {
                 while (eat(条)) {
-                    Node jo = parent.addChild(eaten);
+                    Node jo = addEatenTo(parent);
                     while (true) {
                         if (is(数字))
                             数字(jo);
@@ -87,13 +87,13 @@ public class 健康保険法読込 extends Parser {
     void parseMain(Node parent) {
         注釈(parent);
         while (eat(章)) {
-            Node syo = parent.addChild(eaten);
-            条or注釈(syo);
+            Node sho = addEatenTo(parent);
+            条or注釈(sho);
             while (eat(節)) {
-                Node setu = parent.addChild(eaten);
+                Node setu = addEatenTo(sho);
                 条or注釈(setu);
                 while (eat(款)) {
-                    Node kan = parent.addChild(eaten);
+                    Node kan = addEatenTo(setu);
                     条or注釈(kan);
                 }
             }

@@ -7,6 +7,8 @@ import java.nio.file.Paths;
 
 import org.junit.Test;
 
+import saka1029.kenko.common.TextWriter;
+
 public class TestParser {
 
     @Test
@@ -14,7 +16,9 @@ public class TestParser {
         try (BufferedReader reader = Files.newBufferedReader(Paths.get("data/健康保険法.txt"))) {
             健康保険法読込 p = new 健康保険法読込(reader);
             p.parse();
-            p.root.visit((n, d) -> System.out.print(n.toString().indent(d * 4)), 0);
+            try (TextWriter writer = new TextWriter("data/健康保険法.out.txt")) {
+                p.root.visit((n, d) -> writer.print(n.toString().indent(d * 4)), 0);
+            }
         }
     }
 
