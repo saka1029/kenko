@@ -57,4 +57,10 @@ public abstract class Parser {
         }
         return false;
     }
+
+    public boolean is(Type expected) {
+        if (node == null)
+            return false;
+        return node.type == expected;
+    }
 }

@@ -32,34 +32,41 @@ public class 健康保険法読込 extends Parser {
         types.add(注釈);
     }
     
-    void 目次(Node parent) {
-        while (eat(章)) {
-            Node sho = parent.addChild(eaten);
-            while (eat(節)) {
-                Node setu = sho.addChild(eaten);
-                while (eat(款)) {
-                    setu.addChild(eaten);
-                }
-            }
-        }
-    }
+    // void 目次(Node parent) {
+    //     while (eat(章)) {
+    //         Node sho = parent.addChild(eaten);
+    //         while (eat(節)) {
+    //             Node setu = sho.addChild(eaten);
+    //             while (eat(款)) {
+    //                 setu.addChild(eaten);
+    //             }
+    //         }
+    //     }
+    // }
 
-    void 条(Node parent) {
-        while (eat(条))
-            parent.addChild(eaten);
+    void 漢数字(Node parent) {
+        while (eat(漢数字)) {
+            Node kans = parent.addChild(eaten);
+            while (eat(イロハ))
+                kans.addChild(eaten);
+        }
     }
 
     void 注釈or条(Node parent) {
         while (true) {
-            if (eat(条)) {
-                Node jo = parent.addChild(eaten);
-                while (eat(数字)) {
-                    Node suji = jo.addChild(eaten);
-                    while (eat(漢数字)) {
-                        Node kans = suji.addChild(eaten);
-                        while (eat(イロハ)) {
-                            kans.addChild(eaten);
-                        }
+            if (is(条)) {
+                while (eat(条)) {
+                    Node jo = parent.addChild(eaten);
+                    while (true) {
+                        if (is(数字))
+                            while (eat(数字)) {
+                                Node suji = jo.addChild(eaten);
+                                漢数字(suji);
+                            }
+                        else if (is(漢数字))
+                            漢数字(jo);
+                        else
+                            break;
                     }
                 }
             } else if (eat(注釈)) {
