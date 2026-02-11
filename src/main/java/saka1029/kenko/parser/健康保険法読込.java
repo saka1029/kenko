@@ -7,8 +7,9 @@ import static saka1029.kenko.parser.Pat.*;
  * SYNTAX
  * <pre>
  * 全体     = 注釈 {"章" 条or注釈 {"節" 条or注釈 {"款" 条or注釈}}}
- * 条or注釈 = {{"条" {{"数字" 漢数字} | 漢数字} | 注釈}
+ * 条or注釈 = {{"条" {数字 | 漢数字} | 注釈}
  * 注釈     = {"注釈"}
+ * 数字     = {"数字" 漢数字}
  * 漢数字   = {"漢数字" {"イロハ"}}
  * </pre>
  */
@@ -48,6 +49,13 @@ public class 健康保険法読込 extends Parser {
                 kans.addChild(eaten);
         }
     }
+    
+    void 数字(Node parent) {
+        while (eat(数字)) {
+            Node suji = parent.addChild(eaten);
+            漢数字(suji);
+        }
+    }
 
     void 注釈(Node parent) {
         while (eat(注釈))
@@ -61,10 +69,7 @@ public class 健康保険法読込 extends Parser {
                     Node jo = parent.addChild(eaten);
                     while (true) {
                         if (is(数字))
-                            while (eat(数字)) {
-                                Node suji = jo.addChild(eaten);
-                                漢数字(suji);
-                            }
+                            数字(jo);
                         else if (is(漢数字))
                             漢数字(jo);
                         else
