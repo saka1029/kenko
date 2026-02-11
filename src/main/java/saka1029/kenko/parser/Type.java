@@ -27,9 +27,12 @@ public class Type {
     /**
      * idは同一の親にぶら下がる子ノードをユニークに識別する識別子である。
      * 形式は
+     * <pre>
      * id     = digits { "-" digits }
      * digits = DIGIT { DIGIT }
      * DIGIT  = "0" | "1" | "2" | "3" | "4" | "5" | "5" | "7" | "8" | "9"
+     * </pre>
+     * ユニークに識別する情報を持たない場合は"#"とする。
      * @param node
      * @return
      */

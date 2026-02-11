@@ -9,6 +9,7 @@ public class 健康保険法読込 extends Parser {
     static final Type.IdFunc KAN_NO_ID = node -> KanNo2Str(node.number);
     static final Type.IdFunc IROHA_ID = node -> "" + Iroha2Int(node.number);
     static final Type.IdFunc NUM_ID = node -> Zen2Han(node.number);
+    public static Type 目次 = new Type("目次", "(?<H>)(?<T>目次)", node -> "#");
     public static Type 章 = new Type("章", "(?<H>第" + P漢数字 + "章)" + P空白 + "(?<T>.*)", KAN_ID);
     public static Type 節 = new Type("節", "(?<H>第" + P漢数字 + "節)" + P空白 + "(?<T>.*)", KAN_ID);
     public static Type 款 = new Type("款", "(?<H>第" + P漢数字 + "款)" + P空白 + "(?<T>.*)", KAN_ID);
@@ -16,9 +17,11 @@ public class 健康保険法読込 extends Parser {
     public static Type 数字 = new Type("数字", "(?<H>" + P数字 + ")" + P空白 + "(?<T>.*)", NUM_ID);
     public static Type 漢数字 = new Type("漢数字", "(?<H>" + P漢数字 + ")" + P空白 + "(?<T>.*)", KAN_ID);
     public static Type イロハ = new Type("イロハ", "(?<H>" + Pイロハ + ")" + P空白 + "(?<T>.*)", IROHA_ID);
+    public static Type 注釈 = new Type("注釈", "[(（](?<H>)(?<T>.*)[)）]", node -> "#");
 
     public 健康保険法読込(BufferedReader reader) {
         super(reader);
+        types.add(目次);
         types.add(章);
         types.add(節);
         types.add(款);
@@ -26,6 +29,33 @@ public class 健康保険法読込 extends Parser {
         types.add(数字);
         types.add(漢数字);
         types.add(イロハ);
+        types.add(注釈);
+    }
+    
+    void 目次(Node parent) {
+        while (eat(章)) {
+            Node sho = parent.addChild(eaten);
+            while (eat(節)) {
+                Node setu = sho.addChild(eaten);
+                while (eat(款)) {
+                    setu.addChild(eaten);
+                }
+            }
+        }
+    }
+
+    @Override
+    void parseMain(Node parent) {
+        while (true) {
+            if (eat(注釈)) {
+                parent.children.add(eaten);
+            } else if (eat(目次)) {
+                Node mokuji = parent.addChild(eaten);
+                目次(mokuji);
+            } else {
+                break;  // discard
+            }
+        }
     }
 
 }

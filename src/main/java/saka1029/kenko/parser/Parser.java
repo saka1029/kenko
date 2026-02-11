@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Parser {
+public abstract class Parser {
 
     final Node root;
     final BufferedReader reader;
@@ -32,5 +32,25 @@ public class Parser {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    abstract void parseMain(Node parent);
+
+    public void parse() {
+        get();  // 1トークン先読み
+        parseMain(root);
+    }
+
+    public Node eaten;
+
+    public boolean eat(Type expected) {
+        if (node == null)
+            return false;
+        if (node.type == expected) {
+            eaten = node;
+            get();
+            return true;
+        }
+        return false;
     }
 }

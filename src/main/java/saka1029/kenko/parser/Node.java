@@ -5,6 +5,10 @@ import java.util.List;
 
 public class Node {
 
+    interface Visitor {
+        void visit(Node node, int depth);
+    }
+
     public Node parent;
     public final List<Node> children = new ArrayList<>();
 
@@ -27,6 +31,12 @@ public class Node {
 
     public String id() {
         return type == null ? null : type.id(this);
+    }
+
+    public void visit(Visitor visitor, int depth) {
+        visitor.visit(this, depth);
+        for (Node child : children)
+            child.visit(visitor, depth + 1);
     }
 
     static final String NL = System.lineSeparator();
