@@ -1,16 +1,16 @@
 package saka1029.kenko.parser;
 
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Type {
 
-    public interface IdFunc { String apply(String number); }
     public final String name;
     public final Pattern pattern;
-    final IdFunc idFunc;
+    final Function<String, String> idFunc;
 
-    public Type(String name, String pattern, IdFunc idFunc) {
+    public Type(String name, String pattern, Function<String, String> idFunc) {
         this.name = name;
         this.pattern = Pattern.compile("^%s$".formatted(pattern));
         this.idFunc = idFunc;

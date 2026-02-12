@@ -4,13 +4,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static saka1029.kenko.parser.Pat.*;
 
+import java.util.function.Function;
+
 import org.junit.Test;
 
 public class TestType {
 
     @Test
     public void testType() {
-        Type.IdFunc idf = n -> "" + Kan2Int(n);
+        Function<String, String> idf = n -> "" + Kan2Int(n);
         Type 章 = new Type("章", "第(?<H>" + P漢数字 + ")章" + P空白 + "(?<T>.*)", idf);
         Type 節 = new Type("節", "第(?<H>" + P漢数字 + ")節" + P空白 + "(?<T>.*)", idf);
         Type 条 = new Type("条", "第(?<H>" + P漢数字 + ")条" + P空白 + "(?<T>.*)", idf);

@@ -1,6 +1,8 @@
 package saka1029.kenko.parser;
 
 import java.io.BufferedReader;
+import java.util.function.Function;
+
 import static saka1029.kenko.parser.Pat.*;
 
 /**
@@ -15,10 +17,10 @@ import static saka1029.kenko.parser.Pat.*;
  */
 public class 健康保険法読込 extends Parser {
 
-    static final Type.IdFunc KAN_ID = n -> "" + Kan2Int(n);
-    static final Type.IdFunc KAN_NO_ID = n -> KanNo2Str(n);
-    static final Type.IdFunc IROHA_ID = n -> "" + Iroha2Int(n);
-    static final Type.IdFunc NUM_ID = n -> Zen2Han(n);
+    static final Function<String, String> KAN_ID = n -> "" + Kan2Int(n);
+    static final Function<String, String> KAN_NO_ID = n -> KanNo2Str(n);
+    static final Function<String, String> IROHA_ID = n -> "" + Iroha2Int(n);
+    static final Function<String, String> NUM_ID = n -> Zen2Han(n);
     // public static Type 目次 = new Type("目次", "(?<H>)(?<T>目次)", n -> Node.NO_ID);
     public static Type 章 = new Type("章", "(?<H>第" + P漢数字 + "章)" + P空白 + "(?<T>.*)", KAN_ID);
     public static Type 節 = new Type("節", "(?<H>第" + P漢数字 + "節)" + P空白 + "(?<T>.*)", KAN_ID);
