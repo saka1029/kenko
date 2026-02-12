@@ -18,17 +18,17 @@ public class TestType {
         assertNotNull(child1);
         assertEquals("一", child1.number);
         assertEquals("総則(第一条―第三条)", child1.header);
-        assertEquals("1", child1.id());
+        assertEquals("1", child1.id);
         Node child2 = 節.createNode("  第四節　   補則(第九十八条)  ");
         assertNotNull(child2);
         assertEquals("四", child2.number);
         assertEquals("補則(第九十八条)", child2.header);
-        assertEquals("4", child2.id());
+        assertEquals("4", child2.id);
         Node child3 = 条.createNode("  第三十三条　    この法律において  ");
         assertNotNull(child3);
         assertEquals("三十三", child3.number);
         assertEquals("この法律において", child3.header);
-        assertEquals("33", child3.id());
+        assertEquals("33", child3.id);
     }
 
 }

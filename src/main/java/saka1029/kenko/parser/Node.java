@@ -14,6 +14,7 @@ public class Node {
     public final List<Node> children = new ArrayList<>();
 
     public final Type type;
+    public final String id;
     public final String number;
     public final String header;
     public final List<String> text = new ArrayList<>();
@@ -21,6 +22,7 @@ public class Node {
     public Node(Type type, String number, String header) {
         Objects.requireNonNull(type);
         this.type = type;
+        this.id = type.id(number);
         this.number = number;
         this.header = header;
     }
@@ -29,10 +31,6 @@ public class Node {
         children.add(child);
         child.parent = this;
         return child;
-    }
-
-    public String id() {
-        return type.id(number);
     }
 
     public void visit(Visitor visitor, int depth) {
@@ -47,7 +45,7 @@ public class Node {
     public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append(type).append(": ")
-            .append("id=").append(id()).append(" ")
+            .append("id=").append(id).append(" ")
             .append(number).append(" ").append(header).append(NL);
         for (String line : text)
             sb.append("    ").append(line).append(NL);

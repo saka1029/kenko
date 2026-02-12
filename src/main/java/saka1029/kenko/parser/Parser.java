@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public abstract class Parser {
 
@@ -60,8 +59,12 @@ public abstract class Parser {
     }
 
     boolean is(Type... expected) {
-        return node != null
-            && Stream.of(expected).anyMatch(type -> node.type == type);
+        if (node == null)
+            return false;
+        for (Type t : expected)
+            if (node.type == t)
+                return true;
+        return false;
     }
 
     Node addEatenTo(Node parent) {
