@@ -63,23 +63,15 @@ public class 健康保険法読込 extends Parser {
     }
 
     void 条or注釈(Node parent) {
-        while (true) {
-            if (is(条)) {
-                while (eat(条)) {
-                    Node jo = addEatenTo(parent);
-                    while (true) {
-                        if (is(数字))
-                            数字(jo);
-                        else if (is(漢数字))
-                            漢数字(jo);
-                        else
-                            break;
-                    }
+        while (is(条, 注釈)) {
+            while (eat(条)) {
+                Node jo = addEatenTo(parent);
+                while (is(数字, 漢数字)) {
+                    数字(jo);
+                    漢数字(jo);
                 }
-            } else if (is(注釈)) {
-                注釈(parent);
-            } else
-                break;
+            }
+            注釈(parent);
         }
     }
 
