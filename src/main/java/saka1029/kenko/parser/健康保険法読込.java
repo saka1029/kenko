@@ -19,7 +19,7 @@ public class 健康保険法読込 extends Parser {
     static final Type.IdFunc KAN_NO_ID = n -> KanNo2Str(n);
     static final Type.IdFunc IROHA_ID = n -> "" + Iroha2Int(n);
     static final Type.IdFunc NUM_ID = n -> Zen2Han(n);
-    // public static Type 目次 = new Type("目次", "(?<H>)(?<T>目次)", n -> "#");
+    // public static Type 目次 = new Type("目次", "(?<H>)(?<T>目次)", n -> Node.NO_ID);
     public static Type 章 = new Type("章", "(?<H>第" + P漢数字 + "章)" + P空白 + "(?<T>.*)", KAN_ID);
     public static Type 節 = new Type("節", "(?<H>第" + P漢数字 + "節)" + P空白 + "(?<T>.*)", KAN_ID);
     public static Type 款 = new Type("款", "(?<H>第" + P漢数字 + "款)" + P空白 + "(?<T>.*)", KAN_ID);
@@ -27,7 +27,7 @@ public class 健康保険法読込 extends Parser {
     public static Type 数字 = new Type("数字", "(?<H>" + P数字 + ")" + P空白 + "(?<T>.*)", NUM_ID);
     public static Type 漢数字 = new Type("漢数字", "(?<H>" + P漢数字 + ")" + P空白 + "(?<T>.*)", KAN_ID);
     public static Type イロハ = new Type("イロハ", "(?<H>" + Pイロハ + ")" + P空白 + "(?<T>.*)", IROHA_ID);
-    public static Type 注釈 = new Type("注釈", "[(（](?<H>)(?<T>.*)[)）]", node -> "#");
+    public static Type 注釈 = new Type("注釈", "[(（](?<H>)(?<T>.*)[)）]", node -> Node.NO_ID);
 
     public 健康保険法読込(BufferedReader reader) {
         super(reader);

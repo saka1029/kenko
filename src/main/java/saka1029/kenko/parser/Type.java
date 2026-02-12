@@ -32,7 +32,7 @@ public class Type {
      * digits = DIGIT { DIGIT }
      * DIGIT  = "0" | "1" | "2" | "3" | "4" | "5" | "5" | "7" | "8" | "9"
      * </pre>
-     * ユニークに識別する情報を持たない場合は"#"とする。
+     * ユニークに識別する情報を持たない場合はNode.NO_IDとする。
      * @param number
      * @return
      */

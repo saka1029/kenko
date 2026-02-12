@@ -6,6 +6,8 @@ import java.util.Objects;
 
 public class Node {
 
+    public static final String NO_ID = "#";
+
     interface Visitor {
         void visit(Node node, int depth);
     }

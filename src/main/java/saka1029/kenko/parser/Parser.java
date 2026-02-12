@@ -7,7 +7,7 @@ import java.util.List;
 
 public abstract class Parser {
 
-    static final Type ROOT_TYPE = new Type("ROOT", "", n -> "#");
+    static final Type ROOT_TYPE = new Type("ROOT", "", n -> Node.NO_ID);
     final Node root;
     final BufferedReader reader;
     final List<Type> types = new ArrayList<>();
